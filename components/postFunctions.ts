@@ -10,7 +10,7 @@ export async function fetchPosts(
   for (let p = 0; p < idArray.length; p++) {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/feed/post/?spotifyId=${idArray[p]}`,
+        `/api/feed/post/?spotifyId=${idArray[p]}`,
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -28,14 +28,14 @@ export async function fetchPosts(
   const sortedPosts = allOfThePosts.sort((a, b) => {
     const dateA = new Date(a.createdAt);
     const dateB = new Date(b.createdAt);
-    return dateB - dateA; // Sort in descending order
+    return dateB.getTime() - dateA.getTime(); // Sort in descending order
   });
   setPosts(sortedPosts);
   
 }
 
 export async function goToUserPage(index: string) {
-  window.location.href = `http://localhost:3000/profile/${index}`;
+  window.location.href = `/profile/${index}`;
 }
 
 export async function fetchComments(
@@ -48,7 +48,7 @@ export async function fetchComments(
     for (let i = 0; i < posts.length; i++) {
       const postId = posts[i]._id;
       const response = await axios.get(
-        `http://localhost:3000/api/feed/comments/?postId=${postId}`,
+        `/api/feed/comments/?postId=${postId}`,
         {
           headers: {
             Authorization: "Bearer " + token,
