@@ -21,7 +21,7 @@ export default function Home({ params }: { params: { id: string } }) {
     let storedToken = window.localStorage.getItem("token");
     setId(id);
     setToken(storedToken);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (token) {
@@ -30,7 +30,7 @@ export default function Home({ params }: { params: { id: string } }) {
       fetchFollowers();
       fetchFollowing();
     }
-  }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [token]);
 
   useEffect(() => {
     if (followers.length > 0) {
@@ -38,7 +38,7 @@ export default function Home({ params }: { params: { id: string } }) {
       fetchFollowers();
       fetchFollowing();
     }
-  }, [followers, userIsFollowing]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [followers, userIsFollowing]);
 
   const fetchUserProfile = async () => {
     try {
