@@ -53,9 +53,7 @@ export default function Home({ params }: { params: { id: string } }) {
       setUserName(data.display_name);
       if (data.images && data.images.length > 0) {
         setUserImage(data.images[1].url);
-        console.log(data.images[1].url)
       }
-      console.log(data)
     } catch (error) {
       console.error("Error fetching user profile: ", error);
     }

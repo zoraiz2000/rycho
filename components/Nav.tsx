@@ -20,7 +20,8 @@ const Nav = () => {
     if (storedToken) {
       setToken(storedToken);
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    console.log(storedToken)
+  }, []);
 
   const logout = () => {
     window.localStorage.removeItem("token");
