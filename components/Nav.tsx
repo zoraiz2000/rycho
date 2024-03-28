@@ -24,6 +24,7 @@ const Nav = () => {
     // console.log(storedToken)
     window.addEventListener("storage", handleStorageChange);
     console.log("handler added")
+    console.log(window.localStorage.getItem("token"))
   }, []);
 
   const handleStorageChange = () => {
