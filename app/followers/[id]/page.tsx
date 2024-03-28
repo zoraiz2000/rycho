@@ -67,7 +67,7 @@ export default function FollowingPage({params} : {params: {id: string}}) {
             <div className="container mx-auto mt-8 px-4 bg-[#202020] rounded-lg shadow-md max-w-md">
                 <div className="divide-y divide-[#404040]">
                     {followerList.map((user, index) => (
-                        <div className="flex items-center py-4" onClick={() => handleUserClick(user.spotifyId)}>
+                        <div key={user.spotifyId} className="flex items-center py-4" onClick={() => handleUserClick(user.spotifyId)}>
                             <div className="flex items-center w-full transition duration-300 bg-[#404040] hover:bg-[#505050] hover:scale-105 hover:cursor-pointer py-2 mx-4 rounded-lg">
                                 <img
                                     src={user.image || "/user.png"}
