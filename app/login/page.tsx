@@ -37,7 +37,7 @@ export default function LoginPage() {
     }, [])  // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-      onLogin();
+    //   onLogin();
     }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const fetchUserData = async () => {
@@ -48,7 +48,8 @@ export default function LoginPage() {
       })
       setUser({...user, spotifyId: data.id, username: data.display_name})
       window.localStorage.setItem("spotifyid", data.id)
-      router.push("/profile/" + data.id)
+      console.log("push requested")
+    //   router.push("/profile/" + data.id)
     }
 
 
