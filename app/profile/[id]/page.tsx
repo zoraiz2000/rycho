@@ -175,7 +175,7 @@ export default function Home({ params }: { params: { id: string } }) {
         </div>
 
         <Image
-          className="bg-[#ffffff] mx-auto rounded-full mt-10 mb-3 max-h-32"
+          className="mx-auto rounded-full mt-10 mb-3 max-h-32"
           src={userImage || "/user.png"}
           alt="image not found"
           width={128}
