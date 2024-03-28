@@ -110,6 +110,7 @@ const Nav = () => {
                     <a 
                     href={`/profile/` + s.spotifyId} 
                     className={`cursor-pointer inline-block px-2 py-2 rounded-lg hover:bg-[#202020] ${activeSearch.length === 1 ? 'bg-[#202020]' : ''}`}
+                    key={s.spotifyId}
                     >
                       <span key={s.spotifyId}>                      
                         {s.username}                      
