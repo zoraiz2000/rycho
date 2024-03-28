@@ -2,9 +2,10 @@
 
 import axios from "axios";
 import Image from "next/image";
+import RecentPosts from "./recentPosts";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-// import RecentPosts from "./recentPosts";
+
 
 export default function Home({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -215,7 +216,7 @@ export default function Home({ params }: { params: { id: string } }) {
         )}
         <div className="mx-auto w-4/6">
           <h3 className="text-2xl font-semibold pb-4">
-            {/* <RecentPosts params={{ id: params.id, token: token }} /> */}
+            <RecentPosts params={{ id: params.id, token: token }} />
           </h3>
         </div>
         <div className="fixed bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent to-black"></div>
