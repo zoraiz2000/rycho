@@ -106,7 +106,7 @@ const Nav = () => {
               </div>
               {activeSearch.length > 0 && (
                 <div className="absolute top-14 p-4 bg-[#383838] text-white w-full rounded-xl left-24 ml-2 -translate-x-1/2 flex flex-col gap-2 max-w-52 z-50">
-                  {activeSearch.map((s: any) => (
+                  {activeSearch.map((s: { spotifyId: string; username: string }) => (
                     <a 
                     href={`/profile/` + s.spotifyId} 
                     className={`cursor-pointer inline-block px-2 py-2 rounded-lg hover:bg-[#202020] ${activeSearch.length === 1 ? 'bg-[#202020]' : ''}`}
