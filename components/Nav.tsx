@@ -15,23 +15,28 @@ const Nav = () => {
 
   let userNames: { spotifyId: string; username: string }[] = [];
 
-  React.useEffect(() => {
-    // const storedToken = window.localStorage.getItem("token");
-    // if (storedToken) {
-    //   setToken(storedToken);
-    // }
-    const handleStorageChange = () => {
-        const newToken = window.localStorage.getItem("token");
-        setToken(newToken);
-        console.log(newToken)
-    };
-  
-    // Listen for storage events
+//   React.useEffect(() => {
+//     const storedToken = window.localStorage.getItem("token");
+//     if (storedToken) {
+//       setToken(storedToken);
+//     }
+    
+//     console.log(storedToken)
+//   }, []);
+
+  const handleStorageChange = () => {
+    const newToken = window.localStorage.getItem("token");
+    setToken(newToken);
+  };
+
+//   if (!window.storageEventListenerAdded) {
+    // If not, add the listener
     window.addEventListener("storage", handleStorageChange);
+    // Set a flag to indicate that the listener has been added
+//     window.storageEventListenerAdded = true;
+//   }
 
-    // console.log(storedToken)
-  }, []);
-
+  
   const logout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("spotifyid");
