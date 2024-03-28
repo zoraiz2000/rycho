@@ -13,7 +13,7 @@ export default function Home() {
         if (token) {
             fetchUserProfile(token);
         }
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [])
         
     const fetchUserProfile = async (token: string) => {
         const {data} = await axios.get('https://api.spotify.com/v1/me', {

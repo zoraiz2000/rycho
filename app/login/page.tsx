@@ -34,11 +34,11 @@ export default function LoginPage() {
         window.localStorage.setItem("token", storedToken ?? "")
         fetchUserData()
       }
-    }, [])  // eslint-disable-line react-hooks/exhaustive-deps
+    }, [])
 
     useEffect(() => {
       onLogin();
-    }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [user]);
 
     const fetchUserData = async () => {
       const {data} = await axios.get('https://api.spotify.com/v1/me', {
