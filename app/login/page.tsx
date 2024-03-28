@@ -10,7 +10,7 @@ import React, { useEffect, useState } from 'react';
 export default function LoginPage() {
     const CLIENT_ID = "f9010a7f16bd4939a67261cce4b5cc6f"
     const SCOPE = encodeURIComponent("user-library-read user-top-read playlist-read-private");
-    const REDIRECT_URI = "https://rycho.vercel.app/login"
+    const REDIRECT_URI = "https://rycho.vercel.app"
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
 
     const RESPONSE_TYPE = "token"
@@ -48,7 +48,6 @@ export default function LoginPage() {
       })
       setUser({...user, spotifyId: data.id, username: data.display_name})
       window.localStorage.setItem("spotifyid", data.id)
-      window.location.reload();
       router.push("/profile/" + data.id)      
     }
 
