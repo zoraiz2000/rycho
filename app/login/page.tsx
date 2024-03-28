@@ -10,7 +10,7 @@ import React, { useEffect, useState } from 'react';
 export default function LoginPage() {
     const CLIENT_ID = "f9010a7f16bd4939a67261cce4b5cc6f"
     const SCOPE = encodeURIComponent("user-library-read user-top-read playlist-read-private");
-    const REDIRECT_URI = "http://localhost:3000/login"
+    const REDIRECT_URI = "https://rycho.vercel.app/login"
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
 
     const RESPONSE_TYPE = "token"
