@@ -23,11 +23,13 @@ const Nav = () => {
     
     // console.log(storedToken)
     window.addEventListener("storage", handleStorageChange);
+    console.log("handler added")
   }, []);
 
   const handleStorageChange = () => {
     const newToken = window.localStorage.getItem("token");
     setToken(newToken);
+    console.log(newToken)
   };
 
 //   if (!window.storageEventListenerAdded) {
