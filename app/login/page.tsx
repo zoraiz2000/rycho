@@ -1,10 +1,10 @@
 "use client";
 
 import axios from "axios";
-import Link from "next/link";
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
 import {useRouter} from "next/navigation";
+import React, { useEffect, useState } from 'react';
+
 
 
 export default function LoginPage() {
@@ -34,11 +34,11 @@ export default function LoginPage() {
         window.localStorage.setItem("token", storedToken ?? "")
         fetchUserData()
       }
-    }, [])  
+    }, [])  // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
       onLogin();
-    }, [user]);
+    }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const fetchUserData = async () => {
       const {data} = await axios.get('https://api.spotify.com/v1/me', {
