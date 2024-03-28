@@ -21,7 +21,7 @@ export default function Home({ params }: { params: { id: string } }) {
     let storedToken = window.localStorage.getItem("token");
     setId(id);
     setToken(storedToken);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (token) {
@@ -30,7 +30,15 @@ export default function Home({ params }: { params: { id: string } }) {
       fetchFollowers();
       fetchFollowing();
     }
-  }, [token]);
+  }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (followers.length > 0) {
+      fetchMyFollowing();
+      fetchFollowers();
+      fetchFollowing();
+    }
+  }, [followers, userIsFollowing]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchUserProfile = async () => {
     try {
@@ -54,7 +62,7 @@ export default function Home({ params }: { params: { id: string } }) {
   const fetchMyFollowing = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/api/users/profile?action=getFollowing&spotifyId=${spotifyId}`
+        `/api/users/profile?action=getFollowing&spotifyId=${spotifyId}`
       );
       const { following } = data;
       for (let i = 0; i < following.length; i++) {
@@ -72,7 +80,7 @@ export default function Home({ params }: { params: { id: string } }) {
   const fetchFollowers = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/api/users/profile?action=getFollowers&spotifyId=${params.id}`
+        `/api/users/profile?action=getFollowers&spotifyId=${params.id}`
       );
       const { followers } = data;
       setFollowers(followers);
@@ -84,7 +92,7 @@ export default function Home({ params }: { params: { id: string } }) {
   const fetchFollowing = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/api/users/profile?action=getFollowing&spotifyId=${params.id}`
+        `/api/users/profile?action=getFollowing&spotifyId=${params.id}`
       );
       const { following } = data;
       setFollowing(following);
@@ -96,7 +104,7 @@ export default function Home({ params }: { params: { id: string } }) {
   const handleFollowButtonClick = async () => {
     try {
       if (userIsFollowing === 1) {
-        await axios.delete(`http://localhost:3000/api/users/profile`, {
+        await axios.delete(`/api/users/profile`, {
           data: {
             action: "removeFollowing",
             spotifyId: spotifyId,
@@ -104,7 +112,7 @@ export default function Home({ params }: { params: { id: string } }) {
           },
         });
 
-        await axios.delete(`http://localhost:3000/api/users/profile`, {
+        await axios.delete(`/api/users/profile`, {
           data: {
             action: "removeFollower",
             spotifyId: params.id,
@@ -114,13 +122,13 @@ export default function Home({ params }: { params: { id: string } }) {
 
         setUserFollowing(0);
       } else {
-        await axios.put(`http://localhost:3000/api/users/profile`, {
+        await axios.put(`/api/users/profile`, {
           action: "addFollowing",
           spotifyId: spotifyId,
           followUserId: params.id,
         });
 
-        await axios.put(`http://localhost:3000/api/users/profile`, {
+        await axios.put(`/api/users/profile`, {
           action: "addFollower",
           spotifyId: params.id,
           followUserId: spotifyId,
@@ -153,10 +161,12 @@ export default function Home({ params }: { params: { id: string } }) {
           <h1 className="absolute left-1/2 -translate-x-1/2 text-4xl font-semibold pt-12">
             Profile
           </h1>
+
           {spotifyId != params.id && (
             <button
-              className="absolute left-3/4 text-lg font-bebas-neue-regular transition duration-500 border-2 border-white-500 hover:border-[#121212] 
-          bg-gray-700 hover:bg-gray-500 rounded-full mt-10 pt-0.5 px-4 ml-auto"
+              className="absolute left-3/4 text-lg font-bebas-neue-regular transition duration-500 border-2 border-white-500 hover:border-[#202020] 
+            bg-gray-700 hover:bg-gray-500 rounded-full mt-10 pt-0.5 px-4 ml-auto text-white"
+              onClick={handleFollowButtonClick}
             >
               {userIsFollowing === 1 ? "Unfollow" : "Follow"}
             </button>
@@ -179,7 +189,7 @@ export default function Home({ params }: { params: { id: string } }) {
         <div className="flex justify-center space-x-4 mb-8">
           <a
             href="#"
-            onClick={handleFollowingClick}
+            onClick={handleFollowersClick}
             className="max-h-8 text-lg font-bebas-neue-regular transition duration-500 border-2 border-white-500 hover:border-[#121212] 
           bg-gray-700 hover:bg-gray-500 rounded-full mt-1 pt-0.5 px-3"
           >
@@ -189,21 +199,24 @@ export default function Home({ params }: { params: { id: string } }) {
           <a
             href="#"
             onClick={handleFollowingClick}
-            className="max-h-8 text-lg font-bebas-neue-regular transition duration-500 border-2 border-white-500 hover:border-[#121212]
+            className="max-h-8  text-lg font-bebas-neue-regular transition duration-500 border-2 border-white-500 hover:border-[#121212]
           bg-gray-700 hover:bg-gray-500 rounded-full mt-1 pt-0.5 px-3"
           >
             {following.length} Following
           </a>
         </div>
         {spotifyId == params.id && (
-          <button onClick={handleAddPost} className="font-semibold mx-auto max-w-fit transition duration-500 border-2 border-white-500 hover:border-[#121212] bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 rounded-full py-2 px-6 mb-4 mt-2">
+          <button
+            onClick={handleAddPost}
+            className="font-semibold mx-auto max-w-fit transition duration-500 border-2 border-white-500 hover:border-[#121212] bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 rounded-full py-2 px-6 mb-4 mt-2"
+          >
             Create Post
           </button>
         )}
         <div className="mx-auto w-4/6">
-          {/* <h3 className="text-2xl font-semibold pb-4">
-            <RecentPosts params={{ id: params.id, token: token }} />
-          </h3> */}
+          <h3 className="text-2xl font-semibold pb-4">
+            {/* <RecentPosts params={{ id: params.id, token: token }} /> */}
+          </h3>
         </div>
         <div className="fixed bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent to-black"></div>
       </div>
