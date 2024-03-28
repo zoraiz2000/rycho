@@ -48,7 +48,6 @@ export default function LoginPage() {
       })
       setUser({...user, spotifyId: data.id, username: data.display_name})
       window.localStorage.setItem("spotifyid", data.id)
-      console.log("push requested")
       router.push("/profile/" + data.id)
     }
 
