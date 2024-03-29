@@ -4,7 +4,7 @@ import React from "react";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-// import NotificationDisplay from "../app/notifications/page"
+import NotificationDisplay from "../app/notifications/page"
 
 const Nav = () => {
   const router = useRouter();
@@ -126,9 +126,9 @@ const Nav = () => {
               <Image src="/search.png" alt="Search" width={20} height={12} />
             </div>
           </div>
-          {/* <div className="transition duration-500 border-2 border-white-500 hover:border-[#202020] bg-[#000000] rounded-full h-10 mt-2 w-10 mr-4 flex justify-center items-center cursor-pointer">
+          <div className="transition duration-500 border-2 border-white-500 hover:border-[#202020] bg-[#000000] rounded-full h-10 mt-2 w-10 mr-4 flex justify-center items-center cursor-pointer">
            <NotificationDisplay/>
-          </div> */}
+          </div>
 
           <a
             href={"/profile"}
